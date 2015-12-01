@@ -10,9 +10,13 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 RUN apt-get update && apt-get install -y \
-            mercurial subversion openssh-client \
-            --no-install-recommends && rm -r /var/lib/apt/lists/*
-	
+            mercurial subversion openssh-client locales \
+            --no-install-recommends && rm -r /var/lib/apt/lists/* && \
+    sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    echo 'LANG="en_US.UTF-8"' > /etc/default/locale && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
 RUN cd /opt && \
     git clone https://github.com/phacility/libphutil.git && \
     git clone https://github.com/phacility/arcanist.git && \
@@ -27,6 +31,7 @@ COPY files /
 # Docker properties
 #
 
+ENV LANG en_US.UTF-8
 VOLUME ["/opt/config", "/opt/workspace"]
 WORKDIR /opt/workspace
 CMD ["/usr/local/bin/arc"]
