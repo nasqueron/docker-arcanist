@@ -1,6 +1,8 @@
 # Autocompletion
 source /opt/arcanist/resources/shell/bash-completion
 source /opt/git-completion.bash
+source /etc/bash_completion.d/mercurial
+source /etc/bash_completion.d/subversion
 
 # Prompt - Git information
 source /etc/bash_completion.d/git-prompt 
