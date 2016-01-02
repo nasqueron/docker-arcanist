@@ -1,0 +1,36 @@
+#!/bin/sh
+
+if [ -t 0 ]; then
+	FLAGS=-it
+fi
+
+PRINT_LOG=0
+
+if [ "$1" = "shell" ]; then
+	shift
+	COMMAND=bash
+else
+	mkdir -p ~/.arc
+	COMMAND=arc
+
+	if [ "$1" = "call-conduit" ]; then
+		PRINT_LOG=1
+		INSTANCE=`openssl rand -hex 21`
+		FLAGS="-i -a=stdin --name=$INSTANCE"
+	fi
+fi
+
+if [ -d ~/.arc/ssh ]; then
+	VOLUME_SSH="-v $HOME/.arc/ssh:/root/.ssh"
+else
+	VOLUME_SSH=""
+fi
+
+if [ $PRINT_LOG -eq 0 ]; then
+	docker run $FLAGS --rm -v ~/.arc:/opt/config -v $PWD:/opt/workspace $VOLUME_SSH nasqueron/arcanist $COMMAND $*
+else
+	docker run $FLAGS -v ~/.arc:/opt/config -v $PWD:/opt/workspace $VOLUME_SSH nasqueron/arcanist $COMMAND $* > /dev/null
+	sleep 3
+	docker logs $INSTANCE
+	docker rm $INSTANCE >/dev/null
+fi
