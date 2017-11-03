@@ -11,6 +11,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 
 RUN apt-get update && apt-get install -y \
             mercurial subversion openssh-client locales clang-format-3.5 \
+            silversearcher-ag \
             --no-install-recommends && rm -r /var/lib/apt/lists/* && \
     ln -s /usr/bin/clang-format-3.5 /usr/bin/clang-format
 
