@@ -17,7 +17,6 @@ RUN apt-get update && apt-get install -y \
     ln -s /usr/bin/clang-format-3.5 /usr/bin/clang-format
 
 RUN cd /opt && \
-    git clone https://github.com/phacility/libphutil.git && \
     git clone https://github.com/phacility/arcanist.git && \
     git clone https://github.com/vhbit/clang-format-linter.git && \
     git clone https://devcentral.nasqueron.org/source/shellcheck-linter.git && \
