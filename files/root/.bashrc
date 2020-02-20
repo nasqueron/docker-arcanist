@@ -1,5 +1,5 @@
 # Autocompletion
-source /opt/arcanist/resources/shell/bash-completion
+source /opt/arcanist/support/shell/hooks/bash-completion.sh
 source /opt/git-completion.bash
 source /etc/bash_completion.d/mercurial
 source /etc/bash_completion.d/subversion
