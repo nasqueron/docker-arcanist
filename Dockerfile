@@ -10,12 +10,11 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 RUN apt-get update && apt-get install -y \
-            mercurial subversion openssh-client locales clang-format-3.5 \
+            mercurial subversion openssh-client locales clang-format \
             python3 \
             silversearcher-ag \
             shellcheck \
-            --no-install-recommends && rm -r /var/lib/apt/lists/* && \
-    ln -s /usr/bin/clang-format-3.5 /usr/bin/clang-format
+            --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 RUN cd /opt && \
     git clone https://github.com/phacility/arcanist.git && \
