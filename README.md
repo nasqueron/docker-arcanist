@@ -54,3 +54,27 @@ You can now use `arc shell` to get an interactive shell with your local director
 > **Note:**
 
 > If you use `arc call-conduit` you can't use -it, as you need to pass stdin to the command.
+
+I want a comprehensive arc command
+-----------------------------------
+
+We provide in `contrib/` folder a choice amongst two wrappers to offer
+a more comprehensive `arc` command:
+
+- `contrib/arc` is the recommended choice: if launched as root,
+  it will use the image as is, but if launched as an user, it will bootstrap
+  by building once a `nasqueron/arcanist:<your uid>-<your gid>` small image
+  to be able to run the container as any arbitrary unprivileged user
+
+- `contrib/arc-runs-as-root` is the legacy version if you prefer to skip
+  the build mechanism and run your container as privileged user
+
+The need for a specific image for user is mainly if you want to use ssh,
+as the OpenSSH client requires the running user to exist, and so requires
+a little more than just add `--user $UID` to the docker run command.
+
+Both wrappers solve the conduit issue by redirecting the output to logging,
+exiting the container when done, waiting a little time then reading the log.
+
+They've been battle-tested and used happily to maintain Git repositories
+for some dozens of Docker images and tools used on a PaaS built on Docker.
