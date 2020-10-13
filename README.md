@@ -73,6 +73,9 @@ The need for a specific image for user is mainly if you want to use ssh,
 as the OpenSSH client requires the running user to exist, and so requires
 a little more than just add `--user $UID` to the docker run command.
 
+The `contrib/arc` offers also a `arc update` command to pull the latest
+nasqueron/arcanist image and rebuild the user image if needed.
+
 Both wrappers solve the conduit issue by redirecting the output to logging,
 exiting the container when done, waiting a little time then reading the log.
 
