@@ -9,7 +9,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 # Prepare the container
 #
 
-ENV GIT_VERSION=2.28.0
+ENV GIT_VERSION=2.40.0
 
 RUN apt-get update && apt-get install -y \
             mercurial subversion openssh-client locales clang-format \
