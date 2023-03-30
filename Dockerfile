@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
             python3 \
             silversearcher-ag \
             shellcheck \
+            python3-pip python3-setuptools python3-wheel python3-venv flake8 \
             make libssl-dev libghc-zlib-dev libcurl4-gnutls-dev libexpat1-dev gettext \
             --no-install-recommends && apt-get remove -y git && rm -r /var/lib/apt/lists/* && \
             wget https://github.com/git/git/archive/v$GIT_VERSION.zip -O git.zip && \
